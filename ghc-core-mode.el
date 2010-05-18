@@ -45,7 +45,7 @@ prefixes in the given region."
     (goto-char (point-min))
     (while (flush-lines "^end Rec }$" nil))
     (goto-char (point-min))
-    (while (flush-lines "^ *GblId *$" nil))
+    (while (flush-lines "^ *GblId\\(\\[[^]]+\\]\\)? *$" nil))
     (goto-char (point-min))
     (while (flush-lines "^ *LclId *$" nil))
     (goto-char (point-min))
