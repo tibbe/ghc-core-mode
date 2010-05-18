@@ -35,7 +35,7 @@
   "Remove commonly ignored annotations and namespace
 prefixes in the given region."
   (interactive "r")
-  (save-restriction 
+  (save-restriction
     (narrow-to-region start end)
     (goto-char (point-min))
     (while (search-forward-regexp "GHC\.[^\.]*\." nil t)
@@ -45,7 +45,7 @@ prefixes in the given region."
     (goto-char (point-min))
     (while (flush-lines "^ *LclId *$" nil))
     (goto-char (point-min))
-    (while (flush-lines "^ *LclIdX *$" nil))
+    (while (flush-lines "^ *LclIdX\\(\\[[^]]+\\]\\)? *$" nil))
     (goto-char (point-min))
     (while (flush-lines (concat "^ *\\[\\(?:Arity [0-9]+\\|NoCafRefs\\|"
                                 "Str: DmdType\\|Worker \\)"
