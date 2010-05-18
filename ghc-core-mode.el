@@ -55,7 +55,16 @@ prefixes in the given region."
                                 "Str: DmdType\\|Worker \\)"
                                 "\\([^]]*\\n?\\).*\\] *$") nil))
     (goto-char (point-min))
-    (while (search-forward "Main." nil t) (replace-match "" nil t))))
+    (while (search-forward "Main." nil t) (replace-match "" nil t))
+    (goto-char (point-min))
+    (while (search-forward "`cast`" nil t) (kill-sexp))
+    ;; Must come after the kill-sexp above.
+    (goto-char (point-min))
+    (while (search-forward "`cast`" nil t) (replace-match "" nil t))
+    (goto-char (point-min))
+    (while (search-forward-regexp "\(\\([a-z_][a-zA-Z_'0-9]*\\)[ \n]*\)" nil t)
+      (replace-match "\\1" t nil))
+    ))
 
 (defun ghc-core-clean-buffer ()
   "Remove commonly ignored annotations and namespace
